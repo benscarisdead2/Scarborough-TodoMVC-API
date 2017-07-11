@@ -1,34 +1,27 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const validator = require("express-validator");
-const mustacheExpress = require("mustache-express");
-const path = require("path");
-const routes = require("./routes/index.js");
+//SWAGG SAUCE
 
-// Initialze Express App
+const fs = require('fs');
+const path = require('path');
+const express = require('express');
+const bluebird = require('bluebird');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const routes = require('./routes/index.js')
 const app = express();
 
-// Set Port
-app.set('port', (process.env.PORT || 3001));
+app.use('/static', express.static('static'));
 
-// Serve static files to server
-app.use(express.static(path.join(__dirname, "public")));
+app.get('/', function (req, res) {
+    res.sendFile(__dirname + "/static/index.html");
+});
 
-// Setting up View Engine
-app.engine("mustache", mustacheExpress());
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "mustache");
-// app.set("layout", "layout");
+app.set('port', (process.env.PORT || 3000));
 
-// Body parser and validator implementation
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(validator());
+app.use(bodyParser.urlencoded({extended: true}));
 
-// Routes
 app.use(routes);
 
-// Open Port
-app.listen(app.get('port'), function () {
-    console.log('Node app is running on port', app.get('port'));
+app.listen(3000, function () {
+    console.log('Express app running at: http://localhost:3000/.')
 });
