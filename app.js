@@ -1,5 +1,3 @@
-//SWAGG SAUCE
-
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
@@ -18,10 +16,12 @@ app.get('/', function (req, res) {
 app.set('port', (process.env.PORT || 3000));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
+
+// put routes here
 app.use(routes);
 
 app.listen(3000, function () {
-    console.log('Express app running at: http://localhost:3000/.')
+    console.log('App up.')
 });
