@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 mongoose.Promise = require("bluebird");
-mongoose.connect("mongodb://localhost:27017/anotherdb");
+mongoose.connect("mongodb://localhost:27017/todomvcdb");
 
 const items = new Schema({
   id: { type: Number },
